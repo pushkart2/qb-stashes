@@ -1,11 +1,12 @@
-inRange = false
 
 Citizen.CreateThread(function()
 	while true do
+		inRange = false
+
 		Citizen.Wait(0)
 		local coords = GetEntityCoords(PlayerPedId())
 		for k, v in pairs(Config.StashCoords) do
-			if #(coords - Config.StashCoords[k].coords) < 2.0 then
+			if #(coords - Config.StashCoords[k].coords) < 3.0 then
 				inRange = true
 				DrawText3D(Config.StashCoords[k].coords.x,Config.StashCoords[k].coords.y,Config.StashCoords[k].coords.z, "[E] Stash")
 				if IsControlJustPressed(0, 38) and #Config.StashCoords[k].job == 0 then
@@ -25,8 +26,6 @@ Citizen.CreateThread(function()
 						QBCore.Functions.Notify("Not authorized", "error")
 					end
 				end
-			else
-				inRange = false
 			end
 		end
 		if not inRange then
