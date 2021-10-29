@@ -44,7 +44,7 @@ function isAuthorized(job, k)
 	return false
 end
 
----For bt-target
+---For bt-target only works if your target supports parameters. If it doesnt, you wil have to create new event for each stash. 
 
 RegisterNetEvent("client:setStash")
 AddEventHandler("client:setStash", function(params)
