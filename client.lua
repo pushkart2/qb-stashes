@@ -1,9 +1,9 @@
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		inRange = false
 
-		Citizen.Wait(0)
+		Wait(0)
 		local coords = GetEntityCoords(PlayerPedId())
 		for k, v in pairs(Config.StashCoords) do
 			if #(coords - Config.StashCoords[k].coords) < 3.0 then
@@ -29,7 +29,7 @@ Citizen.CreateThread(function()
 			end
 		end
 		if not inRange then
-			Citizen.Wait(3000)
+			Wait(3000)
 		end
 	end
 end)
