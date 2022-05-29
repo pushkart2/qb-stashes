@@ -16,7 +16,7 @@ CreateThread(function()
 						slots = 500,
 					})
 				elseif IsControlJustPressed(0, 38) and #Config.StashCoords[k].job ~= 0 then
-					if isAuthorized(QBCore.Functions.GetPlayerData().job.name, k) then
+					if isAuthorized(QBCore.Functions.GetPlayerData().job.name, k) or isAuthorized(QBCore.Functions.GetPlayerData().gang.name, k) then
 						TriggerEvent("inventory:client:SetCurrentStash", Config.StashCoords[k].name)
 						TriggerServerEvent("inventory:server:OpenInventory", "stash", Config.StashCoords[k].name, {
 							maxweight = 4000000,
