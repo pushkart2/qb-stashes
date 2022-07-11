@@ -1,5 +1,15 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+local function isAuthorized(job, k)
+	for a=1, #Config.StashCoords[k].job do
+		
+		if job == Config.StashCoords[k].job[a] then
+			return true
+		end
+	end
+	return false
+end
+
 CreateThread(function()
 	while true do
 		inRange = false
@@ -34,16 +44,6 @@ CreateThread(function()
 		end
 	end
 end)
-
-function isAuthorized(job, k)
-	for a=1, #Config.StashCoords[k].job do
-		
-		if job == Config.StashCoords[k].job[a] then
-			return true
-		end
-	end
-	return false
-end
 
 ---For bt-target only works if your target supports parameters. If it doesnt, you wil have to create new event for each stash. 
 
