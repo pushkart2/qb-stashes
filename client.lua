@@ -1,3 +1,14 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
+local function isAuthorized(job, k)
+	for a=1, #Config.StashCoords[k].job do
+		
+		if job == Config.StashCoords[k].job[a] then
+			return true
+		end
+	end
+	return false
+end
 
 CreateThread(function()
 	while true do
@@ -16,7 +27,7 @@ CreateThread(function()
 						slots = 500,
 					})
 				elseif IsControlJustPressed(0, 38) and #Config.StashCoords[k].job ~= 0 then
-					if isAuthorized(QBCore.Functions.GetPlayerData().job.name, k) then
+					if isAuthorized(QBCore.Functions.GetPlayerData().job.name, k) or isAuthorized(QBCore.Functions.GetPlayerData().gang.name, k) then
 						TriggerEvent("inventory:client:SetCurrentStash", Config.StashCoords[k].name)
 						TriggerServerEvent("inventory:server:OpenInventory", "stash", Config.StashCoords[k].name, {
 							maxweight = 4000000,
@@ -33,16 +44,6 @@ CreateThread(function()
 		end
 	end
 end)
-
-function isAuthorized(job, k)
-	for a=1, #Config.StashCoords[k].job do
-		
-		if job == Config.StashCoords[k].job[a] then
-			return true
-		end
-	end
-	return false
-end
 
 ---For bt-target only works if your target supports parameters. If it doesnt, you wil have to create new event for each stash. 
 
